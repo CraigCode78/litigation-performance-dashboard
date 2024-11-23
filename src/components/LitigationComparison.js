@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Users, Brain, FileText, Clock, AlertCircle, TrendingUp, Check, 
-         Search, BookOpen, Gavel, FileCheck, Network, ArrowRight, Workflow, Bot, Microscope, Filter } from 'lucide-react';
+         Search, BookOpen, Gavel, FileCheck, Network, ArrowRight, Workflow, Bot, Microscope, Filter,
+         Building2, Zap, DollarSign } from 'lucide-react';
 
 const ProcessStep = ({ icon: Icon, title, description, isAI }) => (
   <div className={`flex items-center space-x-2 p-2 rounded-lg ${isAI ? 'bg-emerald-50' : 'bg-red-50'}`}>
