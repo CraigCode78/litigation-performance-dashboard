@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Brain, FileText, Clock, AlertCircle, TrendingUp, Check, X, Scale, Database, DollarSign, Zap, Building2, 
+import { Users, Brain, FileText, Clock, AlertCircle, TrendingUp, Check, 
          Search, BookOpen, Gavel, FileCheck, Network, ArrowRight, Workflow, Bot, Microscope, Filter } from 'lucide-react';
 
 const ProcessStep = ({ icon: Icon, title, description, isAI }) => (
@@ -19,8 +19,6 @@ const LitigationComparison = () => {
   const [aiDocuments, setAiDocuments] = useState(0);
   const [showMetrics, setShowMetrics] = useState(false);
   const [processedDocs, setProcessedDocs] = useState(0);
-  const [cost, setCost] = useState(0);
-  const [aiCost, setAiCost] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
 
@@ -28,59 +26,28 @@ const LitigationComparison = () => {
     // Slower progress for human process to represent days of work
     const timer = setInterval(() => {
       setProgress(prev => prev < 100 ? prev + 0.1 : prev);
-      setAiProgress(prev => prev < 100 ? prev + 4 : prev);
-      setDocuments(prev => prev < 100 ? prev + 0.1 : prev);
-      setAiDocuments(prev => prev < 100 ? prev + 4 : prev);
-      setTimeElapsed(prev => prev + 0.05);
+      setAiProgress(prev => prev < 100 ? prev + 1 : prev);
       
-      // Calculate costs based on real figures
-      // Human: $3,450 for 3 days
-      // AI: $0.25 for the same work
-      setCost(prev => {
-        const totalHumanCost = 3450;
-        const secondsIn3Days = 259200; // 3 days in seconds
-        return prev + (totalHumanCost / secondsIn3Days * 0.05); // Cost per 0.05 seconds
-      });
+      // Update documents processed
+      setDocuments(prev => prev < 1000 ? prev + 1 : prev);
+      setAiDocuments(prev => prev < 1000 ? prev + 10 : prev);
       
-      setAiCost(prev => {
-        const totalAICost = 0.25;
-        const aiProcessingTime = 30; // 30 seconds total
-        return prev + (totalAICost / aiProcessingTime * 0.05); // Cost per 0.05 seconds
-      });
+      // Update processed docs count
+      setProcessedDocs(prev => prev < 1000 ? prev + 5 : prev);
       
-      // Simulate document processing rate
-      setProcessedDocs(prev => {
-        const humanRate = 0.1; // slower rate for human process
-        const aiRate = 10; // much faster for AI
-        return prev + humanRate + aiRate;
-      });
-    }, 50);
+      // Update time elapsed
+      setTimeElapsed(prev => prev + 1);
+    }, 100);
 
-    const metricsTimer = setTimeout(() => {
-      setShowMetrics(true);
-    }, 2000);
-
-    return () => {
-      clearInterval(timer);
-      clearTimeout(metricsTimer);
-    };
+    return () => clearInterval(timer);
   }, []);
 
   // Format large numbers with commas
   const formatNumber = (num) => {
-    return new Intl.NumberFormat().format(Math.round(num));
+    return new Intl.NumberFormat().format(Math.floor(num));
   };
 
-  // Format currency
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-    }).format(amount);
-  };
-
-  // Format time in a human-readable way
+  // Format time elapsed
   const formatTime = (seconds) => {
     if (seconds < 60) return `${Math.round(seconds)} seconds`;
     if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
@@ -102,7 +69,7 @@ const LitigationComparison = () => {
     }, 2000);
 
     return () => clearInterval(stepTimer);
-  }, []);
+  }, [processSteps.length]);
 
   return (
     <div className="w-full max-w-6xl mx-auto p-6 bg-gray-50 rounded-xl shadow-lg">
@@ -170,13 +137,6 @@ const LitigationComparison = () => {
               <div className="text-right">
                 <span className="font-medium">Processing Time</span>
                 <div className="text-sm text-gray-500">3 Days</div>
-              </div>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
-              <DollarSign size={20} className="text-red-500" />
-              <div className="text-right">
-                <span className="font-medium">Total Cost</span>
-                <div className="text-sm text-gray-500">$3,450.00</div>
               </div>
             </div>
             <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
@@ -251,13 +211,6 @@ const LitigationComparison = () => {
               <div className="text-right">
                 <span className="font-medium">Processing Time</span>
                 <div className="text-sm text-gray-500">30 Seconds</div>
-              </div>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
-              <DollarSign size={20} className="text-emerald-500" />
-              <div className="text-right">
-                <span className="font-medium">Total Cost</span>
-                <div className="text-sm text-gray-500">$0.25</div>
               </div>
             </div>
             <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-lg">
