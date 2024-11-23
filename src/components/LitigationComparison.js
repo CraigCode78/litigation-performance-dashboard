@@ -18,7 +18,6 @@ const LitigationComparison = () => {
   const [aiProgress, setAiProgress] = useState(0);
   const [documents, setDocuments] = useState(0);
   const [aiDocuments, setAiDocuments] = useState(0);
-  const [showMetrics, setShowMetrics] = useState(false);
   const [processedDocs, setProcessedDocs] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
@@ -381,37 +380,35 @@ const LitigationComparison = () => {
       </div>
 
       {/* Summary Metrics */}
-      {showMetrics && (
-        <div className="mt-8 bg-white p-6 rounded-xl border border-gray-200">
-          <h3 className="text-xl font-bold text-center mb-6 text-gray-800">ROI Impact Analysis</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
-              <Clock size={24} className="mx-auto mb-2 text-emerald-600" />
-              <h4 className="font-semibold text-lg text-center">99.99% Faster</h4>
-              <p className="text-sm text-gray-600 text-center">Processing Speed</p>
-              <div className="mt-2 text-xs text-gray-500 text-center">
-                3 Days → 30 Seconds
-              </div>
+      <div className="mt-8 bg-white p-6 rounded-xl border border-gray-200">
+        <h3 className="text-xl font-bold text-center mb-6 text-gray-800">ROI Impact Analysis</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
+            <Clock size={24} className="mx-auto mb-2 text-emerald-600" />
+            <h4 className="font-semibold text-lg text-center">99.99% Faster</h4>
+            <p className="text-sm text-gray-600 text-center">Processing Speed</p>
+            <div className="mt-2 text-xs text-gray-500 text-center">
+              3 Days → 30 Seconds
             </div>
-            <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
-              <DollarSign size={24} className="mx-auto mb-2 text-emerald-600" />
-              <h4 className="font-semibold text-lg text-center">99.99% Cost Reduction</h4>
-              <p className="text-sm text-gray-600 text-center">Operational Costs</p>
-              <div className="mt-2 text-xs text-gray-500 text-center">
-                $3,450.00 → $0.25
-              </div>
+          </div>
+          <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
+            <DollarSign size={24} className="mx-auto mb-2 text-emerald-600" />
+            <h4 className="font-semibold text-lg text-center">99.99% Cost Reduction</h4>
+            <p className="text-sm text-gray-600 text-center">Operational Costs</p>
+            <div className="mt-2 text-xs text-gray-500 text-center">
+              $3,450.00 → $0.25
             </div>
-            <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
-              <TrendingUp size={24} className="mx-auto mb-2 text-emerald-600" />
-              <h4 className="font-semibold text-lg text-center">99.9% Accuracy</h4>
-              <p className="text-sm text-gray-600 text-center">Error Reduction</p>
-              <div className="mt-2 text-xs text-gray-500 text-center">
-                &lt; 0.1% vs 8-12% error rate
-              </div>
+          </div>
+          <div className="p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-lg">
+            <TrendingUp size={24} className="mx-auto mb-2 text-emerald-600" />
+            <h4 className="font-semibold text-lg text-center">99.9% Accuracy</h4>
+            <p className="text-sm text-gray-600 text-center">Error Reduction</p>
+            <div className="mt-2 text-xs text-gray-500 text-center">
+              &lt; 0.1% vs 8-12% error rate
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
